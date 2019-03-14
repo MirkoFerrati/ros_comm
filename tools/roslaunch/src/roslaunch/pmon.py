@@ -529,6 +529,7 @@ class ProcessMonitor(Thread):
         try:
             #don't let exceptions bomb thread, interferes with exit
             try:
+                logger.info("ProcessMonitor is about to start running...")
                 self._run()
             except:
                 logger.error(traceback.format_exc())
@@ -543,6 +544,10 @@ class ProcessMonitor(Thread):
         plock = self.plock
         dead = []
         respawn = []
+        while not self._registrations_complete:
+            logger.info("mirko hack")
+            time.sleep(0.1) #yield thread
+
         while not self.is_shutdown:
             with plock: #copy self.procs
                 procs = self.procs[:]
