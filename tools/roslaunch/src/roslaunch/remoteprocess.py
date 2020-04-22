@@ -141,6 +141,7 @@ class SSHChildROSLaunchProcess(roslaunch.server.ChildROSLaunchProcess):
         self.ssh = self.sshin = self.sshout = self.ssherr = None
         self.started = False
         self.uri = None
+	self.required = True # if we start a remote launcher, we want it to stay alive
         # self.is_dead is a flag set by is_alive that affects whether or not we
         # log errors during a stop(). 
         self.is_dead = False
